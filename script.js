@@ -43,10 +43,11 @@ function fetchUsers(){
         console.log(resultUser);
         let nameUser = document.createElement('h1');
         let emailUser = document.createElement('h2');
+        let address = document.createElement('h4');
         nameUser.classList.add('userName');
         emailUser.classList.add('userEmail');
         nameUser.innerHTML =  resultUser[0].name;
-        emailUser.innerHTML = resultUser[0].email;    
+        emailUser.innerHTML = resultUser[0].email;
         results.append(nameUser,emailUser);
         }
         else {
