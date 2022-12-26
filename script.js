@@ -8,7 +8,7 @@
  * */
 
 let form = document.forms[0];
-let search = form.elements["search"][0];
+let search = form.elements["search"];
 // let search= document.getElementsByClassName('search');
 let results = document.querySelector('#searchResults');
 
@@ -23,8 +23,10 @@ form.addEventListener('submit', (e)=> {
         fetchUsers(search.value);
     };
 })
-function filterbyName(username){
-    return username = search;
+function filterbyName(user){
+    return user.username == search.value;
+    //username == search.value
+    
 }
 
 //the function en question
@@ -35,21 +37,21 @@ function fetchUsers(){
     })
     .then((response)=> {
          data = response;
-        //  console.log(data);
-        if (filterbyName(data) !== null) {
-        for (let index = 0; index < data.length; index++) {
+         let resultUser = data.filter(filterbyName);
+
+        if (resultUser !== null) {
+        console.log(resultUser);
         let nameUser = document.createElement('h1');
         let emailUser = document.createElement('h2');
         nameUser.classList.add('userName');
         emailUser.classList.add('userEmail');
-        nameUser.innerHTML =  data[index].name;
-        emailUser.innerHTML = data[index].email;    
+        nameUser.innerHTML =  resultUser[0].name;
+        emailUser.innerHTML = resultUser[0].email;    
         results.append(nameUser,emailUser);
-        } 
-    }
-    else {
-        console.log('this name does not exist');
-    }
+        }
+        else {
+            console.log('this name does not exist');
+        }
         
 
     })
